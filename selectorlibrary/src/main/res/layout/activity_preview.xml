@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scrat.app.selectorlibrary.view.HackyViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@drawable/bg_preview_top" />
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="50dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@null"
+        android:onClick="cancelPreview"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_toRightOf="@id/ib_back"
+        android:textColor="@android:color/white"
+        android:gravity="center_vertical" />
+
+    <ImageButton
+        android:id="@+id/ib_check"
+        android:layout_width="50dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@null"
+        android:onClick="checked"
+        android:src="@drawable/ic_round_check_fill" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_preview_bottom" />
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_preview_bottom">
+
+        <TextView
+            android:id="@+id/tv_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/finish"
+            android:textColor="@android:color/white" />
+
+        <FrameLayout
+            android:id="@+id/fl_finish_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/tv_finish"
+            android:background="@drawable/bg_selected_tip"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_finish_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/bg_bar" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:onClick="finishSelected" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/bg_bar">
+
+        <ImageButton
+            android:id="@+id/btn_left"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@null"
+            android:onClick="cancelSelected"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/btn_left"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:text="@string/back" />
+
+        <!--<ImageButton-->
+        <!--android:layout_width="?android:attr/actionBarSize"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="?android:attr/selectableItemBackground"-->
+        <!--android:contentDescription="@null"-->
+        <!--android:src="@drawable/ic_more" />-->
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="@android:color/darker_gray" />-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_bar">
+
+        <TextView
+            android:id="@+id/tv_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/finish"
+            android:textColor="@android:color/darker_gray" />
+
+        <FrameLayout
+            android:id="@+id/fl_finish_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/tv_finish"
+            android:background="@drawable/bg_selected_tip"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_finish_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/bg_bar" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_preview"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:onClick="preview"
+            android:text="@string/preview"
+            android:textColor="@android:color/darker_gray" />
+
+        <View
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:onClick="finishSelected" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
