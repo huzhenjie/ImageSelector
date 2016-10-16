@@ -25,4 +25,15 @@
         android:contentDescription="@null"
         android:src="@drawable/ic_round_check_fill" />
 
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="11"
+        android:textColor="@android:color/white"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
 </com.scrat.app.selectorlibrary.view.SquareFrameLayout>

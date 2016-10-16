@@ -76,18 +76,18 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 
     private SelectorAdapter.OnItemClickListener onItemClickListener = new SelectorAdapter.OnItemClickListener() {
         @Override
-        public boolean onItemClick(ISelectImageItem item, int pos) {
+        public int onItemClick(ISelectImageItem item, int pos) {
             if (item.isChecked()) {
                 selectSortPosList.remove((Integer) pos);
             } else {
                 if (mMaxImgCount > 0 && selectSortPosList.size() >= mMaxImgCount) {
                     Toast.makeText(ImageSelectorActivity.this, "你最多只能选择" + mMaxImgCount + "张照片", Toast.LENGTH_LONG).show();
-                    return false;
+                    return -1;
                 }
                 selectSortPosList.add(pos);
             }
             refreshFinishBtn();
-            return true;
+            return selectSortPosList.size();
         }
     };
 
