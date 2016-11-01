@@ -76,17 +76,17 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         selectSortPosList = new ArrayList<>();
         mAdapter = new SelectorAdapter(onItemClickListener);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
-        ViewTreeObserver vto = mPreviewTv.getViewTreeObserver();
+        ViewTreeObserver vto = mFinishTv.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mPreviewTv.getMeasuredHeight(), mPreviewTv.getMeasuredHeight() + 10));
+                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mFinishTv.getMeasuredHeight(), mFinishTv.getMeasuredHeight() + 10));
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mAdapter);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    mPreviewTv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mFinishTv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 } else {
-                    mPreviewTv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    mFinishTv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
             }
         });
