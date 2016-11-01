@@ -6,7 +6,13 @@
 
 [![](https://jitpack.io/v/huzhenjie/ImageSelector.svg)](https://jitpack.io/#huzhenjie/ImageSelector)
 
-效果图
+> 1. 支持`jitpack`
+> 2. 支持选择多张
+> 3. 支持选择图片数量上限
+> 4. 支持图片选择顺序
+> 5. 支持图片预览
+
+# Preview
 
 ------
 
