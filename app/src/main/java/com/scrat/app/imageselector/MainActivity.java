@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            default:
-                super.onActivityResult(requestCode, resultCode, data);
-                break;
             case REQUEST_CODE_SELECT_IMG:
                 showContent(data);
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
                 break;
         }
     }

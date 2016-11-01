@@ -1,12 +1,17 @@
 package com.scrat.app.selectorlibrary.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +38,7 @@ import java.util.List;
 public class ImageSelectorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int REQUEST_CODE_PREVIEW = 1;
+    private static final int READ_EXTERNAL_STORAGE_CODE = 2;
 
     private RecyclerView mRecyclerView;
     private SelectorAdapter mAdapter;
@@ -106,7 +112,6 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     }
 
     public void cancelSelected(View v) {
-
         finish();
     }
 
@@ -136,7 +141,43 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     }
 
     private void initData() {
-        getSupportLoaderManager().initLoader(0, null, this);
+        if (permissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE_CODE)) {
+            getSupportLoaderManager().initLoader(0, null, this);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case READ_EXTERNAL_STORAGE_CODE:
+                onRequestReadExternalStorageResult(permissions, grantResults);
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
+    }
+
+    private void onRequestReadExternalStorageResult(String[] permissions, int[] grantResults) {
+        if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            initData();
+        } else {
+            Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean permissionGranted(String permission, int requestCode) {
+        int permissionCode = ContextCompat.checkSelfPermission(this, permission);
+        if (permissionCode != PackageManager.PERMISSION_GRANTED) {
+            try {
+                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        return true;
     }
 
     private static final String[] IMAGE_PROJECTION = new String[]{
