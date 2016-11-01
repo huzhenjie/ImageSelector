@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SelectorLibrary</string>
-    <string name="finish">完成</string>
-    <string name="preview">预览</string>
-    <string name="back">返回</string>
+    <string name="finish">Finish</string>
+    <string name="preview">Preview</string>
+    <string name="back">Back</string>
+    <string name="authorization_failed">Authorization failed</string>
+    <string name="limit_of_img_error">You can only select up to %1$d photos</string>
 </resources>

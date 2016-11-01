@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SelectorLibrary</string>
+    <string name="finish">完成</string>
+    <string name="preview">预览</string>
+    <string name="back">返回</string>
+    <string name="authorization_failed">权限获取失败</string>
+    <string name="limit_of_img_error">你最多只能选择 %1$d 张照片</string>
+</resources>

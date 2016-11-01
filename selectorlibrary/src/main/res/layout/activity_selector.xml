@@ -33,20 +33,6 @@
             android:textColor="@android:color/white"
             android:text="@string/back" />
 
-        <!--<ImageButton-->
-        <!--android:layout_width="?android:attr/actionBarSize"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:background="?android:attr/selectableItemBackground"-->
-        <!--android:contentDescription="@null"-->
-        <!--android:src="@drawable/ic_more" />-->
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="@android:color/darker_gray" />-->
-
     </RelativeLayout>
 
     <RelativeLayout

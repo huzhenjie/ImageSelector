@@ -34,6 +34,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         return mConvertView.getContext();
     }
 
+    public View getRootView() {
+        return mConvertView;
+    }
+
     public RecyclerViewHolder setText(int viewId, CharSequence content) {
         TextView view = getView(viewId);
         view.setText(content);

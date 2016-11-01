@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ImageSelector</string>
-    <string name="select_image">Select Image</string>
+    <string name="select_image">选择图片</string>
 </resources>

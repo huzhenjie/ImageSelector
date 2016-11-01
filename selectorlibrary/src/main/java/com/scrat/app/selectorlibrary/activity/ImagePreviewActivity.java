@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -49,7 +50,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
     private TextView mFinishTv;
     private TextView mFinishTipTv;
     private View mFinishTipView;
-    private MyPagerAdapter mAdapter;
     private ArrayList<String> mPaths;
     private int mPosition;
 
@@ -83,8 +83,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     private void initData() {
         mPaths = getIntent().getStringArrayListExtra(EXTRA_PATHS);
-        mAdapter = new MyPagerAdapter(mPaths);
-        mViewPager.setAdapter(mAdapter);
+        MyPagerAdapter adapter = new MyPagerAdapter(mPaths);
+        mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(onPageChangeListener);
         mUnCheckPos = new HashSet<>();
         updateCheckStatus();
@@ -121,6 +121,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
             }
             i ++;
         }
+
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PATHS, mPaths);
         intent.putExtra(EXTRA_FINISH, isFinish);
@@ -135,31 +136,27 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     public static boolean isFinsh(Intent intent) {
-        if (intent == null)
-            return false;
-
-        return intent.getBooleanExtra(EXTRA_FINISH, false);
+        return intent != null && intent.getBooleanExtra(EXTRA_FINISH, false);
     }
 
     private void updateCheckStatus() {
         Drawable drawable;
         if (mUnCheckPos.contains(mPosition)) {
-            drawable = getResources().getDrawable(R.drawable.ic_round_check);
+            drawable = ContextCompat.getDrawable(this, R.drawable.ic_round_check);
         } else {
-            drawable = getResources().getDrawable(R.drawable.ic_round_check_fill);
+            drawable = ContextCompat.getDrawable(this, R.drawable.ic_round_check_fill);
         }
         mCheckedBtn.setImageDrawable(drawable);
 
         if (mUnCheckPos.size() == mPaths.size()) {
             mFinishTipView.setVisibility(View.GONE);
-            mFinishTv.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            mFinishTv.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray));
         } else {
             mFinishTipView.setVisibility(View.VISIBLE);
-            mFinishTv.setTextColor(getResources().getColor(android.R.color.white));
             int totalSelect = mPaths.size() - mUnCheckPos.size();
             mFinishTipTv.setText(String.valueOf(totalSelect));
+            mFinishTv.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         }
-
         mTitleTv.setText(String.format(Locale.getDefault(), "%d/%d", mPosition + 1, mPaths.size()));
     }
 

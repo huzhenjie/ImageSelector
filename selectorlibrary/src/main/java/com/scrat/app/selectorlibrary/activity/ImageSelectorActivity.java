@@ -1,10 +1,12 @@
 package com.scrat.app.selectorlibrary.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -39,6 +41,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 
     private static final int REQUEST_CODE_PREVIEW = 1;
     private static final int READ_EXTERNAL_STORAGE_CODE = 2;
+    private static final String EXTRA_KEY_MAX = "max";
 
     private RecyclerView mRecyclerView;
     private SelectorAdapter mAdapter;
@@ -48,6 +51,12 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     private TextView mFinishTipTv;
     private View mFinishTipView;
     private int mMaxImgCount;
+
+    public static void show(Activity activity, int resquestCode, int maxCount) {
+        Intent i = new Intent(activity, ImageSelectorActivity.class);
+        i.putExtra(EXTRA_KEY_MAX, maxCount);
+        activity.startActivityForResult(i, resquestCode);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,10 +83,14 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mPreviewTv.getMeasuredHeight(), mPreviewTv.getMeasuredHeight() + 10));
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mAdapter);
-                mPreviewTv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    mPreviewTv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    mPreviewTv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
             }
         });
-        mMaxImgCount = getIntent().getIntExtra("max", 0);
+        mMaxImgCount = getIntent().getIntExtra(EXTRA_KEY_MAX, 0);
     }
 
     private SelectorAdapter.OnItemClickListener onItemClickListener = new SelectorAdapter.OnItemClickListener() {
@@ -87,7 +100,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
                 selectSortPosList.remove((Integer) pos);
             } else {
                 if (mMaxImgCount > 0 && selectSortPosList.size() >= mMaxImgCount) {
-                    Toast.makeText(ImageSelectorActivity.this, "你最多只能选择" + mMaxImgCount + "张照片", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ImageSelectorActivity.this, String.format(getString(R.string.limit_of_img_error), mMaxImgCount), Toast.LENGTH_LONG).show();
                     return -1;
                 }
                 selectSortPosList.add(pos);
@@ -102,11 +115,13 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         if (totalSelect > 0) {
             mFinishTipView.setVisibility(View.VISIBLE);
             mFinishTipTv.setText(String.valueOf(totalSelect));
-            mFinishTv.setTextColor(getResources().getColor(android.R.color.white));
-            mPreviewTv.setTextColor(getResources().getColor(android.R.color.white));
+            int white = ContextCompat.getColor(this, android.R.color.white);
+            mFinishTv.setTextColor(white);
+            mPreviewTv.setTextColor(white);
         } else {
-            mFinishTv.setTextColor(getResources().getColor(android.R.color.darker_gray));
-            mPreviewTv.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            int darkerGray = ContextCompat.getColor(this, android.R.color.darker_gray);
+            mFinishTv.setTextColor(darkerGray);
+            mPreviewTv.setTextColor(darkerGray);
             mFinishTipView.setVisibility(View.GONE);
         }
     }
@@ -162,7 +177,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             initData();
         } else {
-            Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.authorization_failed, Toast.LENGTH_SHORT).show();
         }
     }
 
