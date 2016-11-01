@@ -1,6 +1,7 @@
 package com.scrat.app.selectorlibrary.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,9 +52,11 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         if (item.isChecked()) {
             holder.setVisibility(R.id.iv_check, true);
             holder.setVisibility(R.id.v_shadown, true);
+            ViewCompat.animate(holder.getRootView()).setDuration(300L).scaleX(0.9f).scaleY(0.9f).start();
         } else {
             holder.setVisibility(R.id.iv_check, false);
             holder.setVisibility(R.id.v_shadown, false);
+            ViewCompat.animate(holder.getRootView()).setDuration(300L).scaleX(1.0f).scaleY(1.0f).start();
         }
         holder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +70,11 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                     return;
 
                 if (item.isChecked()) {
+                    ViewCompat.animate(v).setDuration(300L).scaleX(1.0f).scaleY(1.0f).start();
                     holder.setVisibility(R.id.iv_check, false);
                     holder.setVisibility(R.id.v_shadown, false);
                 } else {
+                    ViewCompat.animate(v).setDuration(300L).scaleX(0.9f).scaleY(0.9f).start();
                     holder.setVisibility(R.id.iv_check, true);
                     holder.setVisibility(R.id.v_shadown, true);
                     Animation alphaAnimation = new AlphaAnimation(1f, 0f);
