@@ -42,10 +42,11 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     private static final int REQUEST_CODE_PREVIEW = 1;
     private static final int READ_EXTERNAL_STORAGE_CODE = 2;
     private static final String EXTRA_KEY_MAX = "max";
+    private static final String EXTRA_KEY_DATA = "data";
 
     private RecyclerView mRecyclerView;
     private SelectorAdapter mAdapter;
-    private List<Integer> selectSortPosList;
+    private List<Integer> mSelectSortPosList;
     private TextView mFinishTv;
     private TextView mPreviewTv;
     private TextView mFinishTipTv;
@@ -73,7 +74,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         mFinishTipTv = (TextView) findViewById(R.id.tv_finish_tip);
         mFinishTipView = findViewById(R.id.fl_finish_tip);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        selectSortPosList = new ArrayList<>();
+        mSelectSortPosList = new ArrayList<>();
         mAdapter = new SelectorAdapter(onItemClickListener);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         ViewTreeObserver vto = mFinishTv.getViewTreeObserver();
@@ -97,21 +98,21 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         @Override
         public int onItemClick(ISelectImageItem item, int pos) {
             if (item.isChecked()) {
-                selectSortPosList.remove((Integer) pos);
+                mSelectSortPosList.remove((Integer) pos);
             } else {
-                if (mMaxImgCount > 0 && selectSortPosList.size() >= mMaxImgCount) {
+                if (mMaxImgCount > 0 && mSelectSortPosList.size() >= mMaxImgCount) {
                     Toast.makeText(ImageSelectorActivity.this, String.format(getString(R.string.limit_of_img_error), mMaxImgCount), Toast.LENGTH_LONG).show();
                     return -1;
                 }
-                selectSortPosList.add(pos);
+                mSelectSortPosList.add(pos);
             }
             refreshFinishBtn();
-            return selectSortPosList.size();
+            return mSelectSortPosList.size();
         }
     };
 
     private void refreshFinishBtn() {
-        int totalSelect = selectSortPosList.size();
+        int totalSelect = mSelectSortPosList.size();
         if (totalSelect > 0) {
             mFinishTipView.setVisibility(View.VISIBLE);
             mFinishTipTv.setText(String.valueOf(totalSelect));
@@ -131,27 +132,27 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     }
 
     public void finishSelected(View v) {
-        int totalSelect = selectSortPosList.size();
+        int totalSelect = mSelectSortPosList.size();
         if (totalSelect == 0)
             return;
 
-        ArrayList<String> paths = mAdapter.getPathByPosList(selectSortPosList);
+        ArrayList<String> paths = mAdapter.getPathByPosList(mSelectSortPosList);
         finishActivity(paths);
     }
 
     private void finishActivity(ArrayList<String> paths) {
         Intent i = new Intent();
-        i.putStringArrayListExtra("data", paths);
+        i.putStringArrayListExtra(EXTRA_KEY_DATA, paths);
         setResult(RESULT_OK, i);
         finish();
     }
 
     public void preview(View v) {
-        int totalSelect = selectSortPosList.size();
+        int totalSelect = mSelectSortPosList.size();
         if (totalSelect == 0)
             return;
 
-        ArrayList<String> paths = mAdapter.getPathByPosList(selectSortPosList);
+        ArrayList<String> paths = mAdapter.getPathByPosList(mSelectSortPosList);
         ImagePreviewActivity.show(this, REQUEST_CODE_PREVIEW, paths);
     }
 
@@ -208,6 +209,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        resetSelector();
         if (data == null || data.getCount() == 0)
             return;
 
@@ -218,6 +220,11 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
             imgs.add(img);
         }
         mAdapter.replaceDatas(imgs);
+    }
+
+    private void resetSelector() {
+        mSelectSortPosList.clear();
+        refreshFinishBtn();
     }
 
     @Override
@@ -234,7 +241,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
             if (isFinish) {
                 finishActivity(paths);
             } else {
-                mAdapter.replaceCheckDatas(paths, selectSortPosList);
+                mAdapter.replaceCheckDatas(paths, mSelectSortPosList);
                 refreshFinishBtn();
             }
         }
