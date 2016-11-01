@@ -117,11 +117,11 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
             mFinishTipTv.setText(String.valueOf(totalSelect));
             int white = ContextCompat.getColor(this, android.R.color.white);
             mFinishTv.setTextColor(white);
-            mPreviewTv.setTextColor(white);
+            mPreviewTv.setVisibility(View.VISIBLE);
         } else {
             int darkerGray = ContextCompat.getColor(this, android.R.color.darker_gray);
             mFinishTv.setTextColor(darkerGray);
-            mPreviewTv.setTextColor(darkerGray);
+            mPreviewTv.setVisibility(View.GONE);
             mFinishTipView.setVisibility(View.GONE);
         }
     }

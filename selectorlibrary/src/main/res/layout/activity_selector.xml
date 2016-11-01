@@ -30,8 +30,8 @@
             android:layout_toRightOf="@+id/btn_left"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:text="@string/back" />
+            android:text="@string/back"
+            android:textColor="@android:color/white" />
 
     </RelativeLayout>
 
@@ -79,10 +79,11 @@
             android:layout_alignParentBottom="true"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"
             android:onClick="preview"
+            android:paddingLeft="10dp"
             android:text="@string/preview"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
         <View
             android:layout_width="?android:attr/actionBarSize"
