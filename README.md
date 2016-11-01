@@ -10,7 +10,7 @@
 
 ------
 
-![](https://raw.githubusercontent.com/huzhenjie/ImageSelector/master/images/3158364398.gif)
+<img src="https://github.com/huzhenjie/ImageSelector/blob/master/images/3158364398.gif" width="240px" height="427px" />
 
 <img src="https://github.com/huzhenjie/ImageSelector/blob/master/images/device-2016-11-01-164055.png" width="240px" height="427px" />
 <img src="https://github.com/huzhenjie/ImageSelector/blob/master/images/device-2016-11-01-164203.png" width="240px" height="427px" />
