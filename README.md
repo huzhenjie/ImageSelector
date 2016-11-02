@@ -12,7 +12,7 @@
 > 4. 支持图片选择顺序
 > 5. 支持图片预览
 
-# Preview
+# Screenshots & Gifs
 
 ------
 
