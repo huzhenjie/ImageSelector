@@ -12,7 +12,7 @@
         android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/bg_bar">
+        android:background="@color/selector_bg_bar">
 
         <ImageButton
             android:id="@+id/btn_left"
@@ -30,7 +30,7 @@
             android:layout_toRightOf="@+id/btn_left"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@string/back"
+            android:text="@string/selector_back"
             android:textColor="@android:color/white" />
 
     </RelativeLayout>
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/bg_bar">
+        android:background="@color/selector_bg_bar">
 
         <TextView
             android:id="@+id/tv_finish"
@@ -51,7 +51,7 @@
             android:layout_marginRight="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:text="@string/finish"
+            android:text="@string/selector_finish"
             android:textColor="@android:color/darker_gray" />
 
         <FrameLayout
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/bg_bar" />
+                android:textColor="@color/selector_bg_bar" />
         </FrameLayout>
 
         <TextView
@@ -81,7 +81,7 @@
             android:gravity="center_vertical"
             android:onClick="preview"
             android:paddingLeft="10dp"
-            android:text="@string/preview"
+            android:text="@string/selector_preview"
             android:textColor="@android:color/white"
             android:visibility="gone" />
 

@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">SelectorLibrary</string>
-    <string name="finish">Finish</string>
-    <string name="preview">Preview</string>
-    <string name="back">Back</string>
-    <string name="authorization_failed">Authorization failed</string>
-    <string name="limit_of_img_error">You can only select up to %1$d photos</string>
+    <string name="selector_app_name">SelectorLibrary</string>
+    <string name="selector_finish">Finish</string>
+    <string name="selector_preview">Preview</string>
+    <string name="selector_back">Back</string>
+    <string name="selector_authorization_failed">Authorization failed</string>
+    <string name="selector_limit_of_img_error">You can only select up to %1$d photos</string>
 </resources>
