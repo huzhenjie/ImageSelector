@@ -1,5 +1,4 @@
 <resources>
-    <string name="selector_app_name">SelectorLibrary</string>
     <string name="selector_finish">Finish</string>
     <string name="selector_preview">Preview</string>
     <string name="selector_back">Back</string>

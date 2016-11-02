@@ -2,7 +2,6 @@
     package="com.scrat.app.selectorlibrary">
 
     <application
-        android:label="@string/selector_app_name"
         android:supportsRtl="true">
         <activity
             android:name=".activity.ImageSelectorActivity"
