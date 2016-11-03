@@ -1,9 +1,12 @@
 package com.scrat.app.selectorlibrary.activity;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -11,9 +14,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,6 +85,35 @@ public class ImagePreviewActivity extends AppCompatActivity {
         mFinishTv = (TextView) findViewById(R.id.tv_finish);
         mFinishTipTv = (TextView) findViewById(R.id.tv_finish_tip);
         mFinishTipView = findViewById(R.id.fl_finish_tip);
+        mViewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                animateRevealColorFromCoordinates(mViewPager, android.R.color.black, 0, mViewPager.getMeasuredHeight());
+
+                removeGlobalOnLayoutListener(mViewPager.getViewTreeObserver(), this);
+            }
+        });
+    }
+
+    private void animateRevealColorFromCoordinates(ViewGroup viewRoot, @ColorRes int color, int x, int y) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP)
+            return;
+
+        float finalRadius = (float) Math.hypot(viewRoot.getWidth(), viewRoot.getHeight());
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, x, y, 0, finalRadius);
+        viewRoot.setBackgroundColor(ContextCompat.getColor(this, color));
+        anim.setDuration(300L);
+        anim.setInterpolator(new AccelerateDecelerateInterpolator());
+        anim.start();
+    }
+
+    private void removeGlobalOnLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            observer.removeOnGlobalLayoutListener(listener);
+        } else {
+            observer.removeGlobalOnLayoutListener(listener);
+        }
     }
 
     private void initData() {
