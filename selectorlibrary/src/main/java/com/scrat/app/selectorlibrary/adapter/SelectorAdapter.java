@@ -50,41 +50,45 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         final ImageView imageView = holder.getView(R.id.iv_img);
         Glide.with(imageView.getContext()).load(item.getImgPath()).centerCrop().into(imageView);
         if (item.isChecked()) {
-            holder.setVisibility(R.id.iv_check, true);
-            holder.setVisibility(R.id.v_shadown, true);
-            ViewCompat.animate(holder.getRootView()).setDuration(300L).scaleX(0.9f).scaleY(0.9f).start();
+            zoomOut(holder.getRootView());
         } else {
-            holder.setVisibility(R.id.iv_check, false);
-            holder.setVisibility(R.id.v_shadown, false);
-            ViewCompat.animate(holder.getRootView()).setDuration(300L).scaleX(1.0f).scaleY(1.0f).start();
+            zoomIn(holder.getRootView());
         }
-        holder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ISelectImageItem item = getItem(pos);
-                if (item == null)
-                    return;
+        holder.setVisibility(R.id.iv_check, item.isChecked())
+                .setVisibility(R.id.v_shadown, item.isChecked())
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ISelectImageItem item = getItem(pos);
+                        if (item == null)
+                            return;
 
-                int effect = mListener.onItemClick(item, pos);
-                if (effect == -1)
-                    return;
+                        int effect = mListener.onItemClick(item, pos);
+                        if (effect == -1)
+                            return;
 
-                if (item.isChecked()) {
-                    ViewCompat.animate(v).setDuration(300L).scaleX(1.0f).scaleY(1.0f).start();
-                    holder.setVisibility(R.id.iv_check, false);
-                    holder.setVisibility(R.id.v_shadown, false);
-                } else {
-                    ViewCompat.animate(v).setDuration(300L).scaleX(0.9f).scaleY(0.9f).start();
-                    holder.setVisibility(R.id.iv_check, true);
-                    holder.setVisibility(R.id.v_shadown, true);
-                    Animation alphaAnimation = new AlphaAnimation(1f, 0f);
-                    alphaAnimation.setDuration(500L);
-                    holder.setText(R.id.tv_num, String.valueOf(effect));
-                    holder.getView(R.id.tv_num).startAnimation(alphaAnimation);
-                }
-                item.setChecked(!item.isChecked());
-            }
-        });
+                        if (item.isChecked()) {
+                            zoomIn(v);
+                        } else {
+                            zoomOut(v);
+                            Animation alphaAnimation = new AlphaAnimation(1f, 0f);
+                            alphaAnimation.setDuration(500L);
+                            holder.setText(R.id.tv_num, String.valueOf(effect));
+                            holder.getView(R.id.tv_num).startAnimation(alphaAnimation);
+                        }
+                        holder.setVisibility(R.id.iv_check, !item.isChecked())
+                                .setVisibility(R.id.v_shadown, !item.isChecked());
+                        item.setChecked(!item.isChecked());
+                    }
+                });
+    }
+
+    private void zoomIn(View v) {
+        ViewCompat.animate(v).setDuration(300L).scaleX(1.0f).scaleY(1.0f).start();
+    }
+
+    private void zoomOut(View v) {
+        ViewCompat.animate(v).setDuration(300L).scaleX(0.9f).scaleY(0.9f).start();
     }
 
     @Override
@@ -121,7 +125,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             } else if (!isChecked && posList.contains(i)) {
                 posList.remove(i);
             }
-            i ++;
+            i++;
         }
         notifyDataSetChanged();
     }

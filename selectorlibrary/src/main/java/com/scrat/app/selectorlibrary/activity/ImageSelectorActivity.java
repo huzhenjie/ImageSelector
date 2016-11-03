@@ -77,21 +77,25 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         mSelectSortPosList = new ArrayList<>();
         mAdapter = new SelectorAdapter(onItemClickListener);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
-        ViewTreeObserver vto = mFinishTv.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mFinishTv.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mFinishTv.getMeasuredHeight(), mFinishTv.getMeasuredHeight() + 10));
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mAdapter);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    mFinishTv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    mFinishTv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
+
+                removeGlobalOnLayoutListener(mFinishTv.getViewTreeObserver(), this);
             }
         });
         mMaxImgCount = getIntent().getIntExtra(EXTRA_KEY_MAX, 0);
+    }
+
+    private void removeGlobalOnLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            observer.removeOnGlobalLayoutListener(listener);
+        } else {
+            observer.removeGlobalOnLayoutListener(listener);
+        }
     }
 
     private SelectorAdapter.OnItemClickListener onItemClickListener = new SelectorAdapter.OnItemClickListener() {

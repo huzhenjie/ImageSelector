@@ -175,13 +175,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     private void updateCheckStatus() {
-        Drawable drawable;
-        if (mUnCheckPos.contains(mPosition)) {
-            drawable = ContextCompat.getDrawable(this, R.drawable.ic_round_check);
-        } else {
-            drawable = ContextCompat.getDrawable(this, R.drawable.ic_round_check_fill);
-        }
-        mCheckedBtn.setImageDrawable(drawable);
+        int checkedBtnDrawableId = mUnCheckPos.contains(mPosition) ? R.drawable.ic_round_check : R.drawable.ic_round_check_fill;
+        mCheckedBtn.setImageDrawable(ContextCompat.getDrawable(this, checkedBtnDrawableId));
 
         if (mUnCheckPos.size() == mPaths.size()) {
             mFinishTipView.setVisibility(View.GONE);
