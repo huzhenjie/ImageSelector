@@ -53,10 +53,10 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
     private View mFinishTipView;
     private int mMaxImgCount;
 
-    public static void show(Activity activity, int resquestCode, int maxCount) {
+    public static void show(Activity activity, int requestCode, int maxCount) {
         Intent i = new Intent(activity, ImageSelectorActivity.class);
         i.putExtra(EXTRA_KEY_MAX, maxCount);
-        activity.startActivityForResult(i, resquestCode);
+        activity.startActivityForResult(i, requestCode);
     }
 
     @Override
