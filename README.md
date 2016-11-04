@@ -62,14 +62,12 @@ And override the method `onActivityResult` to get the results
 ```
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch (requestCode) {
-        case REQUEST_CODE_SELECT_IMG:
-            List<String> yourSelectImgPaths = data == null ? Collections.<String>emptyList() : data.getStringArrayListExtra("data");
-            Log.d("imgSelector", "paths: " + yourSelectImgPaths);
-            break;
-        default:
-            super.onActivityResult(requestCode, resultCode, data);
-            break;
+    if (requestCode == REQUEST_CODE_SELECT_IMG) {
+        List<String> yourSelectImgPaths = ImageSelector.getImagePaths(data);
+        Log.d("imgSelector", "paths: " + yourSelectImgPaths);
+        return;
     }
+    
+    super.onActivityResult(requestCode, resultCode, data);
 }
 ```
