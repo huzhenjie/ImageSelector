@@ -1,14 +1,13 @@
 package com.scrat.app.imageselector;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.scrat.app.selectorlibrary.ImageSelector;
 
-import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,19 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CODE_SELECT_IMG:
-                showContent(data);
-                break;
-            default:
-                super.onActivityResult(requestCode, resultCode, data);
-                break;
+        if (requestCode == REQUEST_CODE_SELECT_IMG) {
+            showContent(data);
+            return;
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void showContent(Intent data) {
-        List<String> paths = data == null ? Collections.<String>emptyList() : data.getStringArrayListExtra("data");
-        if (paths == null || paths.isEmpty()) {
+        List<String> paths = ImageSelector.getImagePaths(data);
+        if (paths.isEmpty()) {
             mContentTv.setText("没有选择图片");
             return;
         }

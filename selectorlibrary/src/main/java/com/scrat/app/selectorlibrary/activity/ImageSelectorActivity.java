@@ -31,6 +31,7 @@ import com.scrat.app.selectorlibrary.model.Img;
 import com.scrat.app.selectorlibrary.view.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -149,6 +150,10 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         i.putStringArrayListExtra(EXTRA_KEY_DATA, paths);
         setResult(RESULT_OK, i);
         finish();
+    }
+
+    public static List<String> getImagePaths(Intent data) {
+        return data == null ? Collections.<String>emptyList() : data.getStringArrayListExtra(EXTRA_KEY_DATA);
     }
 
     public void preview(View v) {
