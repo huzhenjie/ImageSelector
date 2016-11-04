@@ -12,7 +12,7 @@
         android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/selector_bg_bar">
+        android:background="@color/image_selector_bg_bar">
 
         <ImageButton
             android:id="@+id/btn_left"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/selector_bg_bar">
+        android:background="@color/image_selector_bg_bar">
 
         <TextView
             android:id="@+id/tv_finish"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/selector_bg_bar" />
+                android:textColor="@color/image_selector_bg_bar" />
         </FrameLayout>
 
         <TextView

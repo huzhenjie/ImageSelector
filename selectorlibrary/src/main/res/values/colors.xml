@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="selector_bg_bar">#90000000</color>
+    <color name="image_selector_bg_bar">#90000000</color>
 </resources>
