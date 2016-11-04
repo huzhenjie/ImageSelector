@@ -68,7 +68,7 @@
 <p><strong>Step 2.</strong> Add the dependency</p>
 
 <pre><code>dependencies {
-        compile 'com.github.huzhenjie:ImageSelector:1.0.2'
+        compile 'com.github.huzhenjie:ImageSelector:1.0.3'
 }
 </code></pre>
 
@@ -87,15 +87,13 @@ ImageSelector.show(this, REQUEST_CODE_SELECT_IMG);
 
 <pre><code>@Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch (requestCode) {
-        case REQUEST_CODE_SELECT_IMG:
-            List&lt;String&gt; yourSelectImgPaths = data == null ? Collections.&lt;String&gt;emptyList() : data.getStringArrayListExtra("data");
-            Log.d("imgSelector", "paths: " + yourSelectImgPaths);
-            break;
-        default:
-            super.onActivityResult(requestCode, resultCode, data);
-            break;
+    if (requestCode == REQUEST_CODE_SELECT_IMG) {
+        List&lt;String&gt; yourSelectImgPaths = ImageSelector.getImagePaths(data);
+        Log.d("imgSelector", "paths: " + yourSelectImgPaths);
+        return;
     }
+
+    super.onActivityResult(requestCode, resultCode, data);
 }
 </code></pre>
 
