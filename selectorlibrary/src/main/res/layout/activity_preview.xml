@@ -64,7 +64,7 @@
             android:layout_marginRight="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:text="@string/selector_finish"
+            android:text="@string/image_selector_finish"
             android:textColor="@android:color/white" />
 
         <FrameLayout

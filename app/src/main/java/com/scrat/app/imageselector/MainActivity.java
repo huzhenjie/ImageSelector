@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void showContent(Intent data) {
         List<String> paths = ImageSelector.getImagePaths(data);
         if (paths.isEmpty()) {
-            mContentTv.setText("没有选择图片");
+            mContentTv.setText(R.string.image_selector_select_none);
             return;
         }
 

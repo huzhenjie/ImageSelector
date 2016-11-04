@@ -1,7 +1,7 @@
 <resources>
-    <string name="selector_finish">Finish</string>
-    <string name="selector_preview">Preview</string>
-    <string name="selector_back">Back</string>
-    <string name="selector_authorization_failed">Authorization failed</string>
-    <string name="selector_limit_of_img_error">You can only select up to %1$d photos</string>
+    <string name="image_selector_finish">Finish</string>
+    <string name="image_selector_preview">Preview</string>
+    <string name="image_selector_back">Back</string>
+    <string name="image_selector_authorization_failed">Authorization failed</string>
+    <string name="image_selector_limit_of_img_error">You can only select up to %1$d photos</string>
 </resources>

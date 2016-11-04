@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ImageSelector</string>
-    <string name="select_image">选择图片</string>
+    <string name="image_selector_select_image">选择图片</string>
+    <string name="image_selector_select_none">没有选择图片</string>
 </resources>

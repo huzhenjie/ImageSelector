@@ -106,7 +106,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
                 mSelectSortPosList.remove((Integer) pos);
             } else {
                 if (mMaxImgCount > 0 && mSelectSortPosList.size() >= mMaxImgCount) {
-                    Toast.makeText(ImageSelectorActivity.this, String.format(getString(R.string.selector_limit_of_img_error), mMaxImgCount), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ImageSelectorActivity.this, String.format(getString(R.string.image_selector_limit_of_img_error), mMaxImgCount), Toast.LENGTH_LONG).show();
                     return -1;
                 }
                 mSelectSortPosList.add(pos);
@@ -187,7 +187,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             initData();
         } else {
-            Toast.makeText(this, R.string.selector_authorization_failed, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.image_selector_authorization_failed, Toast.LENGTH_SHORT).show();
         }
     }
 

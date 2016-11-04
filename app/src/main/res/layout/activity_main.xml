@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="selectImg"
-        android:text="@string/select_image" />
+        android:text="@string/image_selector_select_image" />
 
     <ScrollView
         android:layout_width="match_parent"

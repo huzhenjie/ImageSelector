@@ -30,7 +30,7 @@
             android:layout_toRightOf="@+id/btn_left"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@string/selector_back"
+            android:text="@string/image_selector_back"
             android:textColor="@android:color/white" />
 
     </RelativeLayout>
@@ -51,7 +51,7 @@
             android:layout_marginRight="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:text="@string/selector_finish"
+            android:text="@string/image_selector_finish"
             android:textColor="@android:color/darker_gray" />
 
         <FrameLayout
@@ -81,7 +81,7 @@
             android:gravity="center_vertical"
             android:onClick="preview"
             android:paddingLeft="10dp"
-            android:text="@string/selector_preview"
+            android:text="@string/image_selector_preview"
             android:textColor="@android:color/white"
             android:visibility="gone" />
 
