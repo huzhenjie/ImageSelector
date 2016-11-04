@@ -41,7 +41,7 @@ allprojects {
 
 ```
 dependencies {
-    compile 'com.github.huzhenjie:ImageSelector:1.0.2'
+    compile 'com.github.huzhenjie:ImageSelector:1.0.3'
 }
 ```
 
