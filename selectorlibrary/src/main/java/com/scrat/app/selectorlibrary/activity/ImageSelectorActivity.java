@@ -81,6 +81,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         mFinishTv.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                mRecyclerView.setHasFixedSize(true);
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mFinishTv.getMeasuredHeight(), mFinishTv.getMeasuredHeight() + 10));
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mAdapter);
