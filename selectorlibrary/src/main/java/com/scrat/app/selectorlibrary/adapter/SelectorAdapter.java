@@ -40,6 +40,17 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         return new RecyclerViewHolder(v);
     }
 
+    private static final int[] COLORS = new int[]{
+            R.color.image_selector_red,
+            R.color.image_selector_orange,
+            R.color.image_selector_yellow
+    };
+
+    private int getColor(int position) {
+        int pos = position % COLORS.length;
+        return COLORS[pos];
+    }
+
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
         final int pos = holder.getAdapterPosition();
@@ -48,7 +59,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             return;
 
         final ImageView imageView = holder.getView(R.id.iv_img);
-        Glide.with(imageView.getContext()).load(item.getImgPath()).centerCrop().into(imageView);
+        Glide.with(imageView.getContext()).load(item.getImgPath()).placeholder(getColor(pos)).centerCrop().into(imageView);
         if (item.isChecked()) {
             zoomOut(holder.getRootView());
         } else {

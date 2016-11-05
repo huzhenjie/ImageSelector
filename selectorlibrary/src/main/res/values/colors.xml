@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="image_selector_bg_bar">#90000000</color>
+    <color name="image_selector_red">#F44336</color>
+    <color name="image_selector_orange">#FF9800</color>
+    <color name="image_selector_yellow">#FFEB3B</color>
 </resources>
