@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -20,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,26 +76,16 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
         mSelectSortPosList = new ArrayList<>();
         mAdapter = new SelectorAdapter(onItemClickListener);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
-        mFinishTv.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        getWindow().getDecorView().post(new Runnable() {
             @Override
-            public void onGlobalLayout() {
+            public void run() {
                 mRecyclerView.setHasFixedSize(true);
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 10, false, mFinishTv.getMeasuredHeight(), mFinishTv.getMeasuredHeight() + 10));
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mAdapter);
-
-                removeGlobalOnLayoutListener(mFinishTv.getViewTreeObserver(), this);
             }
         });
         mMaxImgCount = getIntent().getIntExtra(EXTRA_KEY_MAX, 0);
-    }
-
-    private void removeGlobalOnLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            observer.removeOnGlobalLayoutListener(listener);
-        } else {
-            observer.removeGlobalOnLayoutListener(listener);
-        }
     }
 
     private SelectorAdapter.OnItemClickListener onItemClickListener = new SelectorAdapter.OnItemClickListener() {

@@ -3,8 +3,6 @@ package com.scrat.app.selectorlibrary.activity;
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -16,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -85,12 +82,10 @@ public class ImagePreviewActivity extends AppCompatActivity {
         mFinishTv = (TextView) findViewById(R.id.tv_finish);
         mFinishTipTv = (TextView) findViewById(R.id.tv_finish_tip);
         mFinishTipView = findViewById(R.id.fl_finish_tip);
-        mViewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        getWindow().getDecorView().post(new Runnable() {
             @Override
-            public void onGlobalLayout() {
+            public void run() {
                 animateRevealColorFromCoordinates(mViewPager, android.R.color.black, 0, mViewPager.getMeasuredHeight());
-
-                removeGlobalOnLayoutListener(mViewPager.getViewTreeObserver(), this);
             }
         });
     }
@@ -106,14 +101,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
         anim.setDuration(300L);
         anim.setInterpolator(new AccelerateDecelerateInterpolator());
         anim.start();
-    }
-
-    private void removeGlobalOnLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            observer.removeOnGlobalLayoutListener(listener);
-        } else {
-            observer.removeGlobalOnLayoutListener(listener);
-        }
     }
 
     private void initData() {
